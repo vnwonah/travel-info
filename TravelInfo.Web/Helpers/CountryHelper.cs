@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using TravelInfo.Web.Models;
@@ -47,18 +48,19 @@ namespace TravelInfo.Web.Helpers
             var phoneCodes = JsonConvert.DeserializeObject<Dictionary<string, string>>(
                                 File.ReadAllText(Path.Combine(_hostingEnvironment.ContentRootPath, "Data/Countries/PhoneCodes.json")));
 
-            foreach (var name in names)
-            {
-                var countryName = name.Value;
-                var countryCode = codes.GetValueOrDefault(name.Key);
-                var countryCapital = capitals.GetValueOrDefault(name.Key);
-                var currencyCode = currencyCodes.GetValueOrDefault(name.Key);
-                var phoneCode = phoneCodes.GetValueOrDefault(name.Key);
+            var keys = names.Keys.ToList();
 
-                var country = new Country(countryCode, countryCapital, countryName, currencyCode, phoneCode);
-                _countries.Add(country);
-                
-            } 
+            keys.ForEach((k) => _countries.Add(
+                    new Country(
+                        codes.GetValueOrDefault(k),
+                        capitals.GetValueOrDefault(k),
+                        names.GetValueOrDefault(k),
+                        currencyCodes.GetValueOrDefault(k),
+                        phoneCodes.GetValueOrDefault(k)
+               )));
+
+            //no need to hold dictionaries in memory after creating list.
+            //since dictionaries are scopped to method  they are available for garbage collection after method is finished executing.
         }
 
         public List<Country> GetCountries()
@@ -66,7 +68,7 @@ namespace TravelInfo.Web.Helpers
             if (_countries != null)
                 return _countries;
 
-            InitializeCountries();
+            InitializeCountries(); //Very unlikely that this will get called as countries will definitely be initialized at startup
             return _countries;
         }
 
