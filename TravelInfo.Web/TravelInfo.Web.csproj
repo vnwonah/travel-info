@@ -9,6 +9,19 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Data\" />
+    <Folder Include="Data\Countries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Entities\Country.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\Countries\Codes.css" />
+  </ItemGroup>
 </Project>

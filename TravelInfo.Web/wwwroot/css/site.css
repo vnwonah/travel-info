@@ -36,6 +36,19 @@ button.accept-policy {
     line-height: inherit;
 }
 
+.center-div {
+    position: absolute;
+    margin: auto;
+    padding:5%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    height: 60%;
+    background-color: #ccc;
+    border-radius: 3px;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

@@ -2,7 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="center-div">
+    <div class="col-md-12">
+        <h2>Enter Location &amp; Destination</h2>
+        <p>Travel Info is powered by <a href="https://docs.microsoft.com/aspnet/core">several free apis</a>.</p>
+    </div>
+
+    <form asp-controller="Home" asp-action="search" method="get">
+        <div class="col-md-12">
+            <div class=" input-group input-group-lg">
+                <input type="text" name="location" class="form-control" placeholder="Departure Country" />
+                <span class="input-group-addon">&ensp; &ensp; &ensp; &ensp;</span>
+                <input type="text" name="destination" class="form-control" placeholder="Destination Country" />
+            </div>
+        </div>
+        <div class="col-md-12" style="float:right">
+            <button>Search</button>
+        </div>
+    </form>
+
+
+
 </div>

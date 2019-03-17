@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TravelInfo.Web.Services;
 
 namespace TravelInfo.Web
 {
@@ -33,6 +34,7 @@ namespace TravelInfo.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<SearchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
