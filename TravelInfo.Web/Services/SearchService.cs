@@ -16,7 +16,6 @@ namespace TravelInfo.Web.Services
         {
             _hostingEnvironment = hostingEnvironment;
             var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Data/Countries.json");
-            _countries = Country.FromJson(path);
 
         }
 

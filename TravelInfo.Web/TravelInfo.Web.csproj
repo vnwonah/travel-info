@@ -17,6 +17,7 @@
     <Folder Include="Entities\" />
     <Folder Include="Data\" />
     <Folder Include="Data\Countries\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Entities\Country.cs" />
