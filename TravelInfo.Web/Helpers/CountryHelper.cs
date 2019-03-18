@@ -81,6 +81,9 @@ namespace TravelInfo.Web.Helpers
         public string GetCountryCode(string countryName)
                            => _countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower()).Code;
 
+        public Country GetCountry(string countryName)
+                            => _countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower());
+
 
     }
 }

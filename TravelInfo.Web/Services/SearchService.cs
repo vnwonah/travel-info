@@ -99,6 +99,8 @@ namespace TravelInfo.Web.Services
         {
             var result = new ResultViewModel
             {
+                Destination = _countryHelper.GetCountry(destination),
+                Location = _countryHelper.GetCountry(location),
                 Currency = await ConvertCurrencyAsync(_countryHelper.GetCurrencyCode(location), _countryHelper.GetCurrencyCode(destination)),
                 Weather = await GetWeatherInfoAsync(_countryHelper.GetCapitalCity(destination))
             };

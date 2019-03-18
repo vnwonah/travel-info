@@ -1,13 +1,44 @@
-﻿@model  TravelInfo.Web.ViewModels.ResultViewModel
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TravelInfo.Web.ViewModels.ResultViewModel
 @{
+    ViewData["Title"] = Model.Location.Code + " - " + Model.Destination.Code;
 }
 
-@foreach(var key in Model.Currency.Keys)
-{
-    <p>@Model.Currency.GetValueOrDefault(key)</p>
-}
+<div class="center-div-wide">
+    <div class="row">
+        <h3>Travel Information for <b>@Model.Location.Name</b> to <b>@Model.Destination.Name</b></h3>
+    </div>
+    <br />
+    <div class="col-md-12">
+        <h5>Destination Country Information</h5>
+        <p>Country Name: @Model.Destination.Name</p>
+        <p>Country Capital: @Model.Destination.Capital</p>
+        <p>Country Phone Code: +@Model.Destination.PhoneCode</p>
+        <p>Country Currency Code: @Model.Destination.CurrencyCode</p>
+    </div>
+    <br />
 
-@Model.Weather.Main.Temp;
+    <div class="col-md-12">
+        <h5>Currency Information</h5>
+        @foreach (var key in Model.Currency.Keys)
+        {
+            <p>1 @Model.Location.CurrencyCode ( @Model.Location.Name) = @Model.Currency.GetValueOrDefault(key) @Model.Destination.CurrencyCode (@Model.Destination.Name)</p>
+        }
+    </div>
+    <br />
+    <div class="col-md-12">
+        <h5>Weather Information</h5>
+
+        <p>Temperature in @Model.Destination.Capital : @Model.Weather.Main.Temp ° Celcius</p>
+        <p>Maximum Predicted Temperture: @Model.Weather.Main.TempMax ° Celcius</p>
+        <p>Minimum Predicted Temperture: @Model.Weather.Main.TempMin ° Celcius</p>
+        @foreach (var weather in Model.Weather.WeatherWeather)
+        {
+            <p>Weather Description: @weather.Description</p>
+        }
+
+    </div>
+</div>
+
+
+
+
