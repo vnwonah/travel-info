@@ -1,7 +1,9 @@
+/*
+    I didn't add more tests because I was already behind on submission time.
+*/
+
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Moq;
 using TravelInfo.Web.Helpers;
