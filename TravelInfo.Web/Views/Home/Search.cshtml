@@ -1,0 +1,11 @@
+﻿@model  TravelInfo.Web.ViewModels.ResultViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@foreach(var key in Model.Currency.Keys)
+{
+    <p>@Model.Currency.GetValueOrDefault(key)</p>
+}

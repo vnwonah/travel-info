@@ -18,6 +18,7 @@
     <Folder Include="Data\" />
     <Folder Include="Data\Countries\" />
     <Folder Include="Helpers\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Entities\Country.cs" />

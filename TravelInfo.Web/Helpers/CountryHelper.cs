@@ -72,5 +72,8 @@ namespace TravelInfo.Web.Helpers
             return _countries;
         }
 
+        public string GetCurrencyCode(string countryName) 
+                            =>_countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower()).CurrencyCode;     
+
     }
 }

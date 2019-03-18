@@ -25,10 +25,10 @@ namespace TravelInfo.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Search(string location, string destination)
+        public async Task<IActionResult> Search(string location, string destination)
         {
-
-            return View();
+            var res = await _searchService.SearchAsync(location, destination);
+            return View(res);
         }
 
         public IActionResult Privacy()
