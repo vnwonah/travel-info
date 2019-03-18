@@ -9,15 +9,18 @@
     </div>
 
     <form asp-controller="Home" asp-action="search" method="get">
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-top:10%; ">
             <div class=" input-group input-group-lg">
                 <input type="text" name="location" class="form-control" placeholder="Departure Country" />
                 <span class="input-group-addon">&ensp; &ensp; &ensp; &ensp;</span>
                 <input type="text" name="destination" class="form-control" placeholder="Destination Country" />
             </div>
         </div>
-        <div class="col-md-12" style="float:right">
-            <button>Search</button>
+        <br/>
+        <div class="col-md-12" style="margin-top:5%;">
+            <div class="form-group">
+                <button class="btn btn-default">Search</button>
+            </div>
         </div>
     </form>
 

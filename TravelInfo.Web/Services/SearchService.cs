@@ -37,7 +37,7 @@ namespace TravelInfo.Web.Services
             var client = _clientFactory.CreateClient("weatherapi");
             try
             {
-                var queryString = String.Format("?{0}&APPID={1}", destinationCity, _weatherAPIKey);
+                var queryString = String.Format("?q={0}&APPID={1}", destinationCity, _weatherAPIKey);
                 var res = await client.GetAsync(queryString);
 
                 if (!res.IsSuccessStatusCode)

@@ -27,6 +27,9 @@ namespace TravelInfo.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string location, string destination)
         {
+            if (string.IsNullOrWhiteSpace(location) || string.IsNullOrWhiteSpace(destination))
+                return RedirectToAction(nameof(Index));
+
             var res = await _searchService.SearchAsync(location, destination);
             return View(res);
         }
