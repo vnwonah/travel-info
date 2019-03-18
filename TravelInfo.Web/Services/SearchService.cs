@@ -106,5 +106,13 @@ namespace TravelInfo.Web.Services
             };
             return result;
         }
+
+        internal bool IsValidCountry(string countryName)
+        {
+            if (_countryHelper.GetCountry(countryName) != null)
+                return true;
+            return false;
+
+        }
     }
 }
