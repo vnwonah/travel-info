@@ -26,4 +26,7 @@
   <ItemGroup>
     <None Remove="Data\Countries\Codes.css" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\js\EmptyJSFile.js" />
+  </ItemGroup>
 </Project>

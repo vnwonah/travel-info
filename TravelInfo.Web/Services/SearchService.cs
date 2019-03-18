@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +19,8 @@ namespace TravelInfo.Web.Services
         private readonly string _currencyApiToken;
         private readonly string _weatherAPIKey;
         private readonly CountryHelper _countryHelper;
-        
+
+
 
         public SearchService(
             IHttpClientFactory clientFactory,
@@ -32,12 +35,12 @@ namespace TravelInfo.Web.Services
             
         }
 
-        public async Task<Weather> GetWeatherInfoAsync(string destinationCity)
+        internal async Task<Weather> GetWeatherInfoAsync(string destinationCity)
         {
             var client = _clientFactory.CreateClient("weatherapi");
             try
             {
-                var queryString = String.Format("?q={0}&APPID={1}", destinationCity, _weatherAPIKey);
+                var queryString = String.Format("?q={0}&units=metric&APPID={1}", destinationCity, _weatherAPIKey);
                 var res = await client.GetAsync(queryString);
 
                 if (!res.IsSuccessStatusCode)
@@ -55,7 +58,7 @@ namespace TravelInfo.Web.Services
             }
         }
 
-        public async Task<Dictionary<string, decimal>> ConvertCurrencyAsync(string fromCurrency, string toCurrency)
+        internal async Task<Dictionary<string, decimal>> ConvertCurrencyAsync(string fromCurrency, string toCurrency)
         {
             var client = _clientFactory.CreateClient("currencyapi");
 
@@ -80,6 +83,16 @@ namespace TravelInfo.Web.Services
                 client.Dispose();
             }
 
+        }
+
+        internal object FilterCountries(string keyword)
+        {
+            var countries = from c in _countryHelper.GetCountries()
+                            where c.Name.ToLower().StartsWith(keyword.ToLower(),
+                                  StringComparison.CurrentCulture)
+                            select new { c.Name };
+
+            return countries;
         }
 
         internal async Task<ResultViewModel> SearchAsync(string location, string destination)

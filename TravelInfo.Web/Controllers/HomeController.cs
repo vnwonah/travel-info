@@ -34,6 +34,13 @@ namespace TravelInfo.Web.Controllers
             return View(res);
         }
 
+        [HttpPost]
+        public JsonResult Countries(string prefix)
+        {
+            var countryNames = _searchService.FilterCountries(prefix);
+            return Json(countryNames);
+        }
+
         public IActionResult Privacy()
         {
             return View();
