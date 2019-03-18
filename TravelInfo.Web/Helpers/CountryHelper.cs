@@ -73,7 +73,14 @@ namespace TravelInfo.Web.Helpers
         }
 
         public string GetCurrencyCode(string countryName) 
-                            =>_countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower()).CurrencyCode;     
+                            =>_countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower()).CurrencyCode;
+
+        public string GetCapitalCity(string countryName)
+                            => _countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower()).Capital;
+
+        public string GetCountryCode(string countryName)
+                           => _countries.FirstOrDefault(c => c.Name.ToLower() == countryName.ToLower()).Code;
+
 
     }
 }

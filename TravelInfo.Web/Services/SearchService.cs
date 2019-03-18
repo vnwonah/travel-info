@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using TravelInfo.Web.Helpers;
+using TravelInfo.Web.Models;
 using TravelInfo.Web.ViewModels;
 
 namespace TravelInfo.Web.Services
@@ -14,7 +15,9 @@ namespace TravelInfo.Web.Services
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
         private readonly string _currencyApiToken;
+        private readonly string _weatherAPIKey;
         private readonly CountryHelper _countryHelper;
+        
 
         public SearchService(
             IHttpClientFactory clientFactory,
@@ -24,8 +27,32 @@ namespace TravelInfo.Web.Services
             _clientFactory = clientFactory;
             _configuration = configuration;
             _currencyApiToken = _configuration["CurrencyAPIToken"];
+            _weatherAPIKey = _configuration["OpenWeatherMapKey"];
             _countryHelper = countryHelper;
             
+        }
+
+        public async Task<Weather> GetWeatherInfoAsync(string destinationCity)
+        {
+            var client = _clientFactory.CreateClient("weatherapi");
+            try
+            {
+                var queryString = String.Format("?{0}&APPID={1}", destinationCity, _weatherAPIKey);
+                var res = await client.GetAsync(queryString);
+
+                if (!res.IsSuccessStatusCode)
+                    return null;
+
+                return JsonConvert.DeserializeObject<Weather>(await res.Content.ReadAsStringAsync());
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                client.Dispose();
+            }
         }
 
         public async Task<Dictionary<string, decimal>> ConvertCurrencyAsync(string fromCurrency, string toCurrency)
@@ -43,7 +70,7 @@ namespace TravelInfo.Web.Services
                 return JsonConvert.DeserializeObject<Dictionary<string, decimal>>(await res.Content.ReadAsStringAsync());
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //log exception
                 return null;
@@ -59,7 +86,8 @@ namespace TravelInfo.Web.Services
         {
             var result = new ResultViewModel
             {
-                Currency = await ConvertCurrencyAsync(_countryHelper.GetCurrencyCode(location), _countryHelper.GetCurrencyCode(destination))
+                Currency = await ConvertCurrencyAsync(_countryHelper.GetCurrencyCode(location), _countryHelper.GetCurrencyCode(destination)),
+                Weather = await GetWeatherInfoAsync(_countryHelper.GetCapitalCity(destination))
             };
             return result;
         }

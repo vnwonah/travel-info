@@ -41,6 +41,11 @@ namespace TravelInfo.Web
                 c.BaseAddress = new Uri("https://free.currencyconverterapi.com/api/v6/convert");
             });
 
+            services.AddHttpClient("weatherapi", c =>
+            {
+                c.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<SearchService>();
             services.AddSingleton<CountryHelper>();
