@@ -13,24 +13,21 @@ namespace TravelInfo.Web.Controllers
     public class HomeController : Controller
     {
         private readonly SearchService _searchService;
-        private readonly CountryHelper _countryHelper;
 
-        public HomeController(SearchService searchService, CountryHelper countryHelper)
+        public HomeController(SearchService searchService)
         {
             _searchService = searchService;
-            _countryHelper = countryHelper;
         }
 
         public IActionResult Index()
         {
-            _countryHelper.GetCountries();
             return View();
         }
 
         [HttpGet]
         public IActionResult Search(string location, string destination)
         {
-            //Autocomplete
+
             return View();
         }
 

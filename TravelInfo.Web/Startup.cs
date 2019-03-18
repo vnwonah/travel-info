@@ -34,6 +34,13 @@ namespace TravelInfo.Web
             });
 
 
+            //using thr clientfactory model because we will be calling multiple apis so we can have named clients in out application.
+
+            services.AddHttpClient("currencyapi", c =>
+            {
+                c.BaseAddress = new Uri("https://free.currencyconverterapi.com/api/v6/convert");
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<SearchService>();
             services.AddSingleton<CountryHelper>();
