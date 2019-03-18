@@ -21,7 +21,6 @@ namespace TravelInfo.Web.Helpers
 
         void InitializeCountries()
         {
-            var x = _hostingEnvironment.ContentRootPath;
             //Couldn't find an API to get comprehensive country data 
             //so I am constructing the countries list from json files
 
